@@ -69,7 +69,7 @@ namespace Othello.Game {
 		#region Computed properties.
 		public IReadOnlyList<OthelloMove> MoveHistory => mMoveHistory;
 
-		public int CurrentPlayer => mCurrentPlayer == 1 ? 1 : 2;
+		public int CurrentPlayer => mCurrentPlayer == 1 ? 1 : 2; // should use {} to shows that it's a property
 
 		public bool IsFinished => PassCount == 2;
 		#endregion
