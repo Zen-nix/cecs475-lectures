@@ -124,14 +124,14 @@ namespace Othello.Game {
 					// "friendly" square.
 					if (steps > 1 && GetPlayerAtPosition(newPos) == CurrentPlayer) {
 						// Record a FlipSet for this direction
-						currentFlips.Add(new FlipSet(dir, (sbyte)(steps - 1)));
+						currentFlips.Add(new FlipSet(dir, (sbyte)(steps - 1))); // this is use later in undo. it has dir and count
 
 						var reverse = -dir;
 						// Repeatedly walk back the way we came, updating the board with the current player's piece.
 						do {
 							newPos = newPos.Translate(reverse);
 							SetPlayerAtPosition(newPos, CurrentPlayer);
-							mAdvantageValue += 2 * mCurrentPlayer;
+							mAdvantageValue += 2 * mCurrentPlayer; // Need better understanding at this math logic
 
 							steps--;
 						}
@@ -162,11 +162,11 @@ namespace Othello.Game {
 				// Iterate through all 8 cardinal directions from the current position.
 				foreach (BoardDirection dir in BoardDirection.CardinalDirections) {
 					// Repeatedly move in the selected direction, as long as we find "enemy" squares.
-					BoardPosition newPos = position;
+					BoardPosition newPos = position; // newPos = (2,1); dir = <0,1>
 					int steps = 0;
 					do {
-						newPos = newPos.Translate(dir);
-						steps++;
+						newPos = newPos.Translate(dir); //newPos = (2,1)
+						steps++; // 2
 					} while (PositionIsEnemy(newPos, CurrentPlayer));
 
 					// This is a valid direction of flips if we moved at least 2 squares, and ended in bounds and on a
