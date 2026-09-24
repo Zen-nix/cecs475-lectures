@@ -55,6 +55,14 @@ namespace LinqIntegrated {
 				new() {Title = "The Empire Strikes Back", Year = 1980, ProductionCompany = "Lucasfilm Ltd.", Budget = 33000000,
 					Earnings = 538400000, RunningTime = 124 },
 			];
+			// Class note
+			var f2 = movies.Where(m=> m.Earnings > m.Budget);
+			// tranforming func, it return a string
+			var x = movies.Select(m => m.Title);
+			// give back parts of a title
+			var x2 = movies.Select(m => m.Title.Substring(0,3));
+			//Real use case: var nonPixarTitles = movies.Where(m => m.ProductionCompany != "Pixar Animation Studios")
+			
 
 
 			Console.WriteLine("Finding onlyPixarMovies \n");
@@ -63,12 +71,13 @@ namespace LinqIntegrated {
 			// onlyPixarMovies is IEnumerable<Movie> containing only the elements of movies that passed the where clause.
 			// More LINQ methods can be called on the result.
 			var f = onlyPixarMovies.Skip(2).First();
+			// Answer: Finding Dory
 
 
 			// Describe these sequences.
 			Console.WriteLine("Finding nonPixarTitles \n");
-			var nonPixarTitles = movies.Where(m => m.ProductionCompany != "Pixar Animation Studios")
-				.Select(m => m.Title);
+			var nonPixarTitles = movies.Where(m => m.ProductionCompany != "Pixar Animation Studios") // left with titles of pixar movie
+				.Select(m => m.Title); //.select is projection, take a squence and map it.
 
 			Console.WriteLine("Finding shortMovies  \n");
 			var shortMovies = movies.Where(m => m.RunningTime < 100);
